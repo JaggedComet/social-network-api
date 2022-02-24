@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const reactionSchema = require("./reaction");
+const userSchema = require("./user");
 
 const thoughtsSchema = new Schema(
   {
@@ -22,9 +23,17 @@ const thoughtsSchema = new Schema(
   {
     toJSON: {
       getters: true,
+      virtuals: true,
     },
   }
 );
+
+// reactionSchema
+//   .virtual('reaction')
+//   // Getter
+//   .get(function () {
+//     return `color: ${this.color}`;
+//   });
 
 const Thoughts = model("thoughts", thoughtsSchema);
 
