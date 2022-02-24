@@ -16,8 +16,12 @@ const userSchema = new Schema(
       required: true,
       unique: true,
       validate: {
-        validate: [validateEmail, 'Please fill a valid email address'],
-        match: [/^([a-zA-Z0-9_\.-]+)@([\da-zA-Z\.-]+)\.([a-zA-Z\.]{2,6})$/, 'Please fill a valid email address']
+        validator: function (email) {
+          return /^([a-zA-Z0-9_\.-]+)@([\da-zA-Z\.-]+)\.([a-zA-Z\.]{2,6})$/.test(email);
+        },
+        message: "This is not a valid email, please fill in a valid email address."
+        // validate: [validateEmail, 'Please fill a valid email address'],
+        // match: [/^([a-zA-Z0-9_\.-]+)@([\da-zA-Z\.-]+)\.([a-zA-Z\.]{2,6})$/, 'Please fill a valid email address']
       },
     },
     thoughts: [{type: Schema.Types.ObjectId, ref: "thought"}],
