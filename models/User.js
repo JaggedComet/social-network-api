@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
-const reactionSchema = require('./reaction');
-const thoughtsSchema = require('./thoughts');
+
 
 
 const userSchema = new Schema(
@@ -44,4 +43,4 @@ userSchema
 
 const User = model('user', userSchema);
 
-module.exports = Student;
+module.exports = User;
