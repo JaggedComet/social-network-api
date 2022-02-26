@@ -20,7 +20,10 @@ module.exports = {
     // Create Thought then add to the user's thought array
     createThought(req, res) {
         Thought.create(req.body).then((thought) => {
-            User.findOneAndUpdate({_id: req.body.userId}, { $addToSet: {thoughts: req.params.thoughtId}}, {new: true});
+            User.findOneAndUpdate({username: req.body.username}, { $addToSet: {thoughts: thought._id}}, {new: true})
+            .then(thoughtArray => {
+                console.log(thoughtArray)
+            });
             res.json(thought);
         }).catch((err) => res.status(500).json(err));
     },
@@ -40,5 +43,8 @@ module.exports = {
                 ? res.status(404).json({message: "NO thought with this ID"})
                 : res.json(thought)
         ).catch((err) => res.status(500).json(err));
-    }
+    },
+    // getReactions(req, res) {
+    //     Thought.find()
+    // }
 }
