@@ -12,6 +12,7 @@ Click on "Try it yourself" to get the link to the repository!
 
 ![Demo](./assets/images/demo.gif)<br>
 
+[Link to Video Demo](https://drive.google.com/file/d/19e186S6mX4XGKzZL2jYUkQXyw72QrYuA/view)<br>
 
 ## Installation
 
