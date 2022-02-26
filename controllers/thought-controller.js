@@ -1,4 +1,4 @@
-const { User, Thought } = require("../models");
+const { User, Thought, Reaction } = require("../models");
 
 
 module.exports = {
@@ -44,7 +44,35 @@ module.exports = {
                 : res.json(thought)
         ).catch((err) => res.status(500).json(err));
     },
-    // getReactions(req, res) {
-    //     Thought.find()
-    // }
-}
+    // Gets all Reactions 
+    getReactions(req, res) {
+        Reaction.find()
+        .then((thoughts) => res.json(thoughts))
+        .catch((err) => res.status(500).json(err));
+    },
+    // Creates a Reaction
+    createReaction(req, res) {
+        Reaction.create(req.body).then((reaction) => {
+            Thought.findOneAndUpdate(
+                {username: req.body.username},
+                {$addToSet: {reactions: reaction}},
+                {new: true}
+            ).then((reactionArray)  => {
+                console.log(reactionArray);
+            });
+            res.json(reaction);
+        }).catch((err) => res.status(500).json(err));
+    },
+    // Delete a Reaction
+    deleteReaction(req, res) {
+        Thought.findOneAndUpdate(
+            { _id: req.params._id },
+            { $pull: { reactions: { _id: req.params._id } } },
+            { new: true }
+        ).then((reaction) =>
+            !reaction
+                ? res.status(404).json({message: "Reaction Has Been Removed"})
+                :res.json(reaction)
+        ).catch((err) => res.status(500).json(err));
+    },
+};
