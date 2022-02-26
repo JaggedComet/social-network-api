@@ -18,7 +18,6 @@ const reactionSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    // Use Dayjs or something to figure this out
     default: Date.now,
   }
 })
@@ -34,7 +33,6 @@ const thoughtsSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      getter: "???",
     },
     username: {
         type: String,
